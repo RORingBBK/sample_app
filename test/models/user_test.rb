@@ -1,9 +1,7 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+
   def setup
     @user = User.new(name: "Bibek Khadka", email: "sample@test.com",
                      password: "sampletest", password_confirmation: "sampletest")
@@ -73,5 +71,9 @@ class UserTest < ActiveSupport::TestCase
   test "password should have a minumum length" do
     @user.password = @user.password_confirmation = "a" * 5
     assert_not @user.valid?
+  end
+
+  test "authenticated? should return false with user with nil digest" do
+    assert_not @user.authenticated?('')
   end
 end
