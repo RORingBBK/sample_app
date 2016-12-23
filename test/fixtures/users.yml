@@ -1,1 +1,4 @@
-# later on
+wayne:
+  name: Wayne Rooney
+  email: wayne@rooney.com
+  password_digest: <%= User.digest('nepal123') %>
