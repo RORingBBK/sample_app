@@ -40,7 +40,6 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   end
 
   test "login with remembering" do
-    byebug
     log_in_as(@user, remember_me: '1')
     assert_not_empty cookies['remember_token']
     # assert_equal @user, assigns(:user).
