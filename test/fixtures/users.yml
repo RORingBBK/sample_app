@@ -2,8 +2,16 @@ wayne:
   name: Wayne Rooney
   email: wayne@rooney.com
   password_digest: <%= User.digest('nepal123') %>
+  admin: true
 
-pogba:
+paul:
   name: Paul Pogba
   email: paul@pogba.com
   password_digest: <%= User.digest('nepal123') %>
+
+<% 30.times do |n| %>
+user_<%= n %>:
+  name: <%= "User #{n}" %>
+  email: <%= "user-#{n}@example.com" %>
+  password_digest: <%= User.digest('nepal123') %>
+<% end %>
