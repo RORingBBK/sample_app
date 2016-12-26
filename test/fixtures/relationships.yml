@@ -1,0 +1,17 @@
+one:
+  follower: wayne
+  followed: paul
+
+one:
+  follower: wayne
+  followed: malory
+
+one:
+  follower: lana
+  followed: wayne
+
+one:
+  follower: paul
+  followed: wayne
+
+
