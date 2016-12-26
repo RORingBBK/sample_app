@@ -1,0 +1,31 @@
+day:
+  content: "Happy Monday folks!"
+  created_at: <%= 10.minutes.ago %>
+  user: wayne
+
+christmas_party:
+  content: "Enjoyed this holiday alot."
+  created_at: <%= 2.years.ago %>
+  user: wayne
+
+test_video:
+  content: "I just uploaded the first youtube video. Yippie"
+  created_at: <%= 2.hours.ago %>
+  user: wayne
+
+most_recent:
+  content: "Enjoying my albanian coffee."
+  created_at: <%= Time.zone.now %>
+  user: wayne
+
+ants:
+  content: "I want to save ants."
+  created_at: <%= 2.years.ago %>
+  user: paul
+
+<% 30.times do |n| %>
+micropost_<%= n %>:
+  content: <%= Faker::Lorem.sentence(5) %>
+  created_at: <%= 42.days.ago %>
+  user: wayne
+<% end %>
