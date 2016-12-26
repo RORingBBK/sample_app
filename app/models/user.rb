@@ -41,7 +41,7 @@ class User < ApplicationRecord
   # Returns true if the given token matches the digest.
   def authenticated?(attribute, token)
     digest = send("#{attribute}_digest")
-    return false if remember_digest.nil?
+    return false if digest.nil?
     BCrypt::Password.new(digest).is_password?(token)
   end
 
@@ -55,12 +55,6 @@ class User < ApplicationRecord
     self.email = email.downcase # or before_save { self.email = email.downcase }
   end
 
-  # Creates and assigns the activation token and digest.
-  def create_activation_digest
-    self.activation_token = User.new_token
-    self.activation_digest = User.digest(activation_token)
-  end
-
   # Activates an account.
   def activate
     update_attribute(:activated, true)
@@ -72,7 +66,6 @@ class User < ApplicationRecord
     UserMailer.account_activation(self).deliver_now
   end
 
-  # Sets the password reset attributes.
   def create_reset_digest
     self.reset_token = User.new_token
     update_attribute(:reset_digest, User.digest(reset_token))
@@ -90,19 +83,20 @@ class User < ApplicationRecord
 
   # Returns a user's status feed.
   def feed
-    following_ids = "SELECT followed_id FROM active_relationships
+    following_ids = "SELECT followed_id FROM relationships
                      WHERE follower_id = :user_id"
     Micropost.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
   end
 
   # Follows a user.
   def follow(other_user)
-    active_relationships.create(followed_id: other_user.id
+    active_relationships.create(followed_id: other_user.id)
   end
 
   # Unfollows a user.
   def unfollow(other_user)
-    following.delete(other_user)    
+    following.delete(other_user)
+    # active_relationships.find_by(followed_id: other_user.id).destroy    
   end
 
   # Returns true if the current user is following the other user.

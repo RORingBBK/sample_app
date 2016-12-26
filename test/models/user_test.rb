@@ -88,7 +88,7 @@ class UserTest < ActiveSupport::TestCase
   test "should follow and unfollow a user" do
     wayne = users(:wayne)
     paul = users(:paul)
-    assert_not micheal.following?(archer)
+    assert_not wayne.following?(paul)
     wayne.follow(paul)
     assert wayne.following?(paul)
     assert paul.followers.include?(wayne)
@@ -106,11 +106,11 @@ class UserTest < ActiveSupport::TestCase
     end
     # Posts from self
     wayne.microposts.each do |post_self|
-      assert wayne.feel.include?(post_self)
+      assert wayne.feed.include?(post_self)
     end
     # Posts from unfollowed user
     paul.microposts.each do |post_unfollowed|
-      assert_not micheal.feed.include?(post_unfollowed)
+      assert_not wayne.feed.include?(post_unfollowed)
     end
   end
 end

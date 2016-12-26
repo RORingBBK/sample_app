@@ -37,6 +37,7 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
   test "microposts sidebar count" do
     log_in_as(@user)
     get root_path
+    byebug
     assert_match "#{@user.microposts.count} microposts", response.body
     # User with zero microposts
     other_user = users(:paul)

@@ -1,16 +1,16 @@
 one:
   follower: wayne
-  followed: paul
+  followed: lana
 
-one:
+two:
   follower: wayne
   followed: malory
 
-one:
+three:
   follower: lana
   followed: wayne
 
-one:
+four:
   follower: paul
   followed: wayne
 
