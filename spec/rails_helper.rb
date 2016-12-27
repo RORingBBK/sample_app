@@ -55,3 +55,14 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
+
+  # Defining helper for sessions_helper_spec.rb
+  def is_logged_in?
+    !session[:user_id].nil?
+  end
+
+  def log_in_as(user, options={})
+    password = options[:password] || 'nepal123'
+    session[:user_id] = user.id
+  end
+  
