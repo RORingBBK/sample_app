@@ -21,6 +21,7 @@ group :development, :test do
   gem 'pry'
   gem 'pg'
   gem 'byebug',  '9.0.0', platform: :mri
+  gem 'rspec-rails'
 end
 
 group :development do
