@@ -3,7 +3,7 @@ require 'test_helper'
 class UsersEditTest < ActionDispatch::IntegrationTest
 
   def setup
-    @user = users(:wayne)
+    @user = users(:michael)
   end
 
   test "unsuccessful edit" do
@@ -12,10 +12,10 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     assert_template 'users/edit'
     patch user_path(@user), params: { user: { name: "",
                                               email: "test@invalid",
-                                              password: "nepal123",
-                                              password_confirmation: "123nepal" } }
+                                              password: "foo",
+                                              password_confirmation: "bar" } }
     assert_template 'users/edit'
-    assert_select 'div.alert', "The form contains 3 errors."
+    assert_select 'div.alert', "The form contains 4 errors."
   end
 
   test "successful edit with friendly forwarding" do
